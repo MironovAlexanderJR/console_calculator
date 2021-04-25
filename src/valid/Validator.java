@@ -3,19 +3,23 @@ package valid;
 public class Validator implements IValidator {
     @Override
     public boolean check(String inputString) {
-        if (isWhitespace(inputString) && isLetter(inputString)
-                && checkOperands(inputString) && checkTheFirstOperand(inputString)
-                && checkTheLastOperand(inputString) && сheckForParentheses(inputString)) return true;
-        System.out.println("The expression is not correct");
-        return false;
+        return isWhitespace(inputString) && isLetter(inputString)
+                && checkOperands(inputString) && checkForParentheses(inputString);
     }
 
     private boolean isWhitespace(String inputString) {
-        return inputString.chars().noneMatch(Character::isWhitespace);
+        if (inputString.chars().noneMatch(Character::isWhitespace)) {
+            return true;
+        }
+        else System.out.println("Expression cannot have spaces");
+        return false;
     }
 
     private boolean isLetter(String inputString) {
-        return inputString.chars().noneMatch(Character::isLetter);
+        if (inputString.chars().noneMatch(Character::isLetter)) {
+            return true;
+        }else System.out.println("Expression cannot contain letters");
+        return false;
     }
 
     private boolean checkOperands(String inputString) {
@@ -23,21 +27,14 @@ public class Validator implements IValidator {
         for (int i = 0; i < operands.length(); i++) {
             String expectedOperand = String.valueOf(operands.charAt(i));
             if (!validOperation(expectedOperand)) {
+                System.out.println("Expression can only contain numbers, operators, and parentheses");
                 return false;
             }
         }
         return true;
     }
 
-    private boolean checkTheFirstOperand(String inputString) {
-        return Character.isDigit(inputString.charAt(0)) || validOperation(String.valueOf(inputString.charAt(0)));
-    }
-
-    private boolean checkTheLastOperand(String inputString) {
-        return Character.isDigit(inputString.charAt(inputString.length() - 1)) || validOperation(String.valueOf((inputString.charAt(inputString.length() - 1))));
-    }
-
-    private boolean сheckForParentheses(String inputString) {
+    private boolean checkForParentheses(String inputString) {
         int firstParentheses = 0;
         int secondParentheses = 0 ;
         for (int i = 0; i < inputString.length(); i++) {
