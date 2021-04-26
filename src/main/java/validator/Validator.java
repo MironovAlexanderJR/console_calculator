@@ -1,11 +1,13 @@
 package validator;
 
+import helperMethods.ZerosBeforeMinuses;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validator implements IValidator{
+public class Validator implements IValidator, ZerosBeforeMinuses {
     @Override
     public boolean check(String inputString) {
         return isWhitespace(inputString) && isLetter(inputString)
@@ -36,7 +38,8 @@ public class Validator implements IValidator{
                 return false;
             }
         }
-        if (countNumbers(inputString) - operands.length() != 1) {
+        String expressionWithTheAdditionOfMinusSign = addingZerosBeforeMinuses(inputString);
+        if (countNumbers(expressionWithTheAdditionOfMinusSign) - operands.length() != 1) {
             System.out.println("Сan be no more operands than numbers");
             return false;
         }
@@ -73,5 +76,21 @@ public class Validator implements IValidator{
             numbers.add(m.group());
         }
         return numbers.size();
+    }
+
+    @Override
+    public String addingZerosBeforeMinuses(String expresion) {
+        StringBuilder preparedExpression = new StringBuilder();
+        for (int token = 0; token < expresion.length(); token++) {
+            char symbol = expresion.charAt(token);
+            if (symbol == '-') {
+                if (token == 0)
+                    preparedExpression.append('0');
+                else if (expresion.charAt(token-1) == '(')
+                    preparedExpression.append('0');
+            }
+            preparedExpression.append(symbol);
+        }
+        return preparedExpression.toString();
     }
 }

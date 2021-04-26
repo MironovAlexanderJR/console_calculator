@@ -1,6 +1,6 @@
 package calc;
 
-import priorityOfOperands.Priority;
+import helperMethods.Priority;
 
 import java.util.Stack;
 
