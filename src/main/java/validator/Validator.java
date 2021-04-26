@@ -40,7 +40,7 @@ public class Validator implements IValidator, ZerosBeforeMinuses {
         }
         String expressionWithTheAdditionOfMinusSign = addingZerosBeforeMinuses(inputString);
         if (countNumbers(expressionWithTheAdditionOfMinusSign) - operands.length() != 1) {
-            System.out.println("Сan be no more operands than numbers");
+            System.out.println("Invalid expression");
             return false;
         }
         return true;
