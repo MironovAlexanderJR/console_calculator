@@ -28,7 +28,7 @@ public class Validator implements IValidator{
     }
 
     private boolean checkOperands(String inputString) {
-        String operands = inputString.replaceAll("[0-9.]","");
+        String operands = inputString.replaceAll("[0-9.|()]","");
         for (int i = 0; i < operands.length(); i++) {
             String expectedOperand = String.valueOf(operands.charAt(i));
             if (!validOperation(expectedOperand)) {
