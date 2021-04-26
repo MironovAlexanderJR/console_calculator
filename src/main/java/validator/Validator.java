@@ -1,5 +1,10 @@
 package validator;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validator implements IValidator{
     @Override
     public boolean check(String inputString) {
@@ -31,6 +36,10 @@ public class Validator implements IValidator{
                 return false;
             }
         }
+        if (countNumbers(inputString) - operands.length() != 1) {
+            System.out.println("Сan be no more operands than numbers");
+            return false;
+        }
         return true;
     }
 
@@ -51,10 +60,18 @@ public class Validator implements IValidator{
             case "-":
             case "*":
             case "/":
-            case "(":
-            case ")":
                 return true;
         }
         return false;
+    }
+
+    private int countNumbers(String input) {
+        Pattern p = Pattern.compile("\\d+(\\.\\d*)?");
+        Matcher m = p.matcher(input);
+        final List<String> numbers = new ArrayList<>();
+        while (m.find()) {
+            numbers.add(m.group());
+        }
+        return numbers.size();
     }
 }
