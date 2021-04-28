@@ -1,9 +1,11 @@
-package pars;
+package converter;
 
-import priorityOfOperands.Priority;
+import helperMethods.Priority;
+import helperMethods.ZerosBeforeMinuses;
+
 import java.util.Stack;
 
-public class PostfixConverter implements IPostfixConverter, Priority {
+public class PostfixConverter implements IPostfixConverter, Priority, ZerosBeforeMinuses {
     @Override
     public String convert(String inputString) {
         String preparedString = addingZerosBeforeMinuses(inputString);
@@ -40,7 +42,8 @@ public class PostfixConverter implements IPostfixConverter, Priority {
         return current.toString();
     }
 
-    private String addingZerosBeforeMinuses(String expresion) {
+    @Override
+    public String addingZerosBeforeMinuses(String expresion) {
         StringBuilder preparedExpression = new StringBuilder();
         for (int token = 0; token < expresion.length(); token++) {
             char symbol = expresion.charAt(token);
