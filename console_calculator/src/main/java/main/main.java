@@ -49,7 +49,7 @@ public class main {
     private static void checkAndCalculate(String ex) {
         if (new Validator().check(ex)) {
             String RPNExpression = new PostfixConverter().convert(ex);
-            System.out.println(new Calculator().calculate(RPNExpression));
+            System.out.println("-> " + new Calculator().calculate(RPNExpression));
         }
     }
 
