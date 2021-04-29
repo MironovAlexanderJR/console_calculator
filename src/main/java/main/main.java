@@ -10,7 +10,7 @@ public class main {
     public static void main(String[] args) {
         System.out.println("Hello, dear user, welcome to my calculator!!!\n" +
                 "To start write \"S\"\n" +
-                "To finish write any string other than\"S\"");
+                "To finish write any string other than \"S\"");
         while (true) {
             String inputString = parsLine();
             while (true) {
@@ -19,24 +19,24 @@ public class main {
                     inputString = parsLine();
                     checkAndCalculate(inputString);
                     System.out.println("Would you like to solve another expression?\n" +
-                                           "(yes or no)" );
+                                           "(yes or no)");
                     while (true) {
                         inputString = parsLine();
                         if (inputString.equals("yes")) {
                             System.out.println("Write your expression");
                             inputString = parsLine();
                             checkAndCalculate(inputString);
-                            System.out.println("Would you like to solve another expression?");
+                            System.out.println("Would you like to solve another expression\n" +
+                                           "(yes or no)");
                         } else if (inputString.equals("no")) {
                             System.out.println("Thank you for using my calculator, have a nice day!!!");
                             break;
                         } else System.out.println("Please answer yes or no!");
                     }
-                    break;
                 }else {
                     System.out.println("Good bye");
-                    break;
                 }
+                break;
             }break;
     }
     }
